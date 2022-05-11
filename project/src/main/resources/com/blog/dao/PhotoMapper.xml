@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.dao.PhotoMapper">
+    <!--    //添加photo-->
+    <!--    int addPhoto(Photo photo);-->
+    <insert id="addPhoto" parameterType="photo">
+        insert into blog.blog_photo (photo_addr,photo_userId)
+        values (#{photoAddr},#{photoUserId});
+    </insert>
+    <!--    //修改photo-->
+    <!--    int updatePhoto(Photo photo);-->
+    <update id="updatePhoto" parameterType="photo">
+        update blog.blog_photo
+        set photo_addr = #{photoAddr},photo_userId = #{photoUserId}
+        where photo_id = #{photoId};
+    </update>
+    <!--    //删除photo-->
+    <!--    int deletePhoto(long id);-->
+    <delete id="deletePhoto">
+        delete
+        from blog.blog_photo
+        where photo_id = #{id};
+    </delete>
+    <!--    //查询photo-->
+    <!--    Photo queryPhotoById(long id);-->
+    <select id="queryPhotoById" resultType="photo">
+        select *
+        from blog.blog_photo
+        where photo_id = #{id};
+    </select>
+</mapper>

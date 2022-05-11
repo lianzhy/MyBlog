@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.dao.ArticleMapper">
+    <!--    //添加Article-->
+    <!--    int addArticle(Article article);-->
+    <insert id="addArticle" parameterType="article">
+        insert into blog.blog_article (article_typeId,article_title,article_content,article_uploadTime,article_views,user_id)
+        values (#{articleTypeId},#{articleTitle},#{articleContent},#{articleUploadTime},#{articleViews},#{userId});
+    </insert>
+    <!--    //修改Article-->
+    <!--    int updateArticle(Article article);-->
+    <update id="updateArticle" parameterType="article">
+        update blog.blog_article
+        set article_typeId = #{articleTypeId},article_title = #{articleTitle},
+            article_content = #{articleContent},article_uploadTime = #{articleUploadTime},
+            article_views = #{articleViews},user_id = #{userId}
+        where article_id = #{articleId};
+    </update>
+    <!--    //删除Article-->
+    <!--    int deleteArticle(@PathVariable(value = "articleId") long id);-->
+    <delete id="deleteArticle">
+        delete
+        from blog.blog_article
+        where article_id = #{articleId};
+    </delete>
+    <!--    //查询Article-->
+    <!--    List<Article> queryArticleByUser(@PathVariable(value = "userId") long id);-->
+    <select id="queryArticleByUser" resultType="article">
+        select *
+        from blog.blog_article
+        where user_id = #{userId};
+    </select>
+    <!--    //按标题模糊查询-->
+    <!--    List<Article> queryArticleByTitle(String articleTitle);-->
+    <select id="queryArticleByTitle" resultType="article">
+        select *
+        from blog.blog_article
+        where article_title like concat('%',#{articleTitle},'%');
+    </select>
+</mapper>
